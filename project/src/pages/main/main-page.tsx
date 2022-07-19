@@ -1,6 +1,6 @@
 import React from 'react';
-import CreateFilmCard from '../../components/film-card/film-card';
-import { filmData, fimlMock } from '../../mock/film-mock';
+import FilmCard from '../../components/film-card/film-card';
+import { filmMock } from '../../mock/film-mock';
 
 export default function CreateMainPage () : JSX.Element {
   return (
@@ -104,7 +104,7 @@ export default function CreateMainPage () : JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            {fimlMock.forEach((film) => {<CreateFilmCard title={film.title} picture={film.picture}/>;})}
+            {filmMock.map((film) => <FilmCard key={film.id} title={film.title} picture={film.picture}/>)}
           </div>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

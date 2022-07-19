@@ -1,9 +1,9 @@
 interface FilmProps {
   title: string,
-  picture: string;
+  picture: string
 }
 
-export default function CreateFilmCard ({title, picture}: FilmProps) : JSX.Element {
+export default function FilmCard ({title, picture}: FilmProps) : JSX.Element {
   return (
     <article className="small-film-card catalog__films-card">
       <div className="small-film-card__image">
