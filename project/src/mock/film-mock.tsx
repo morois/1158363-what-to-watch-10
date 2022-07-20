@@ -1,15 +1,17 @@
-import { getRandomInt } from '../utils/common-utils';
+import { getRendomIndexArr, getRandomInt } from '../utils/common-utils';
 
-interface FilmDataTypeObj {
+const FILM_VALUE = 20;
+
+export interface Film {
     title: string,
     picture: string,
 }
 
-interface FilmEntry extends FilmDataTypeObj {
+interface FilmEntry extends Film {
   id: string;
 }
 
-const filmData: FilmDataTypeObj[] = [
+const filmMocks: Film[] = [
   {title: 'Macbeth', picture:'img/macbeth.jpg'},
   {title: 'Aviator', picture: 'img/aviator.jpg'},
   {title: 'Bohemian Rhapsody', picture: 'img/bohemian-rhapsody.jpg'},
@@ -30,11 +32,11 @@ const filmData: FilmDataTypeObj[] = [
   {title: 'Mindhunter', picture: 'img/mindhunter.jpg'}
 ];
 
-const getRandomCardFilm = (_v: never, k: number): FilmEntry => ({
-  ...filmData[getRandomInt(0, filmData.length)],
-  id: k.toString(),
+const getRandomCardFilm = (_value: never, key: number): FilmEntry => ({
+  ...filmMocks[getRendomIndexArr(filmMocks)],
+  id: key.toString(),
 });
 
-const filmMock = Array.from({length:20}, getRandomCardFilm);
+const filmMock = Array.from({length: FILM_VALUE}, getRandomCardFilm);
 
-export {filmMock, filmData};
+export {filmMock, filmMocks};
