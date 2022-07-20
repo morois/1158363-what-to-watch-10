@@ -13,9 +13,9 @@ const getRandomInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const getRendomIndexArr = (array: string[]) => {
+const getRendomElement = (array: any[]) => {
   const randomIndex = getRandomInt(0, array.length - 1);
   return array[randomIndex];
 };
 
-export {getRandomInt, getRendomIndexArr};
+export {getRendomElement};

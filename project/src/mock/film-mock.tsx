@@ -1,4 +1,4 @@
-import { getRendomIndexArr, getRandomInt } from '../utils/common-utils';
+import { getRendomElement } from '../utils/common-utils';
 
 const FILM_VALUE = 20;
 
@@ -33,7 +33,7 @@ const filmMocks: Film[] = [
 ];
 
 const getRandomCardFilm = (_value: never, key: number): FilmEntry => ({
-  ...filmMocks[getRendomIndexArr(filmMocks)],
+  ...getRendomElement(filmMocks),
   id: key.toString(),
 });
 
