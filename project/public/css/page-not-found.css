@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+.page-not-found {
+    top: 10%;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+.error-404 {
+    margin-top: 100px;
+    text-align: center; 
+    font-size: 10em;
+    position: relative;
+}
+
+.not-found {
+    text-align: center;
+    font-size: 2em;
+    position: relative;
+    white-space: pre;
+}
+
+.go-home {
+    border-radius: 30px;
+    background-color: aliceblue;
+    position: relative;
+    left: 39%;
+    top: 5%;
+    font-size: 3em;
+}
+
+.go-home:hover {
+    color: #fff;
+    background: rgb(176, 236, 168);
+}
+
+.go-home a {
+    text-decoration: none;
+    color: black;
+   margin: 10px 10px 10px 10px;
+}
