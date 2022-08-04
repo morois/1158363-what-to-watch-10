@@ -1,8 +1,12 @@
 import React from 'react';
-import FilmCard from '../../components/film-card/film-card';
-import { filmMock } from '../../mock/film-mock';
+import {Film} from '../../types/films';
+import FilmList from '../film-list/film-list';
 
-export default function CreateMainPage () : JSX.Element {
+type MainProps = {
+  films: Film[];
+}
+
+export default function CreateMainPage ({films}: MainProps) : JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -103,9 +107,8 @@ export default function CreateMainPage () : JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {filmMock.map((film) => <FilmCard key={film.id} title={film.title} picture={film.picture}/>)}
-          </div>
+          <FilmList films={films}/>
+
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
