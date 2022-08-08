@@ -7,7 +7,7 @@ export const films: Films = [
     posterImage: 'img/macbeth.jpg',
     previewImage: 'img/macbeth.jpg',
     backgroundImage: 'img/macbeth.jpg',
-    backgroundColor: '#000000',
+    backgroundColor: '#333333',
     videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     previewVideoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     description: 'Three witches predict the ascension to the throne for a high-ranking Scottish nobleman, Lord Macbeth. He plans to usurp royal power at any cost.',
