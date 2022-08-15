@@ -14,6 +14,7 @@ import { Films } from '../../types/films';
 type AppProps = {
   films: Films
 }
+
 function App({films}: AppProps): JSX.Element {
   return (
     <BrowserRouter>

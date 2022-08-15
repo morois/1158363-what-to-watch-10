@@ -8,8 +8,8 @@ type ListProps = {
 export default function FilmList({films}: ListProps): JSX.Element {
   const filmCards = films.map((film) => (
     <FilmCard
-      key = {film.id}
-      film = {film}
+      key={film.id}
+      film={film}
     />
   ));
   return (
