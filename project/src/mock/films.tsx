@@ -24,7 +24,7 @@ export const films: Films = [
       'Brendan Gleeson'
     ],
     runTime: 105,
-    genre: 'drama',
+    genre: 'Drama',
     released: 2021,
     isFavorite: false
   },
@@ -51,7 +51,7 @@ export const films: Films = [
       'Jude Law',
     ],
     runTime: 170,
-    genre: 'drama',
+    genre: 'Drama',
     released: 2004,
     isFavorite: true
   },
@@ -79,7 +79,7 @@ export const films: Films = [
       'Mike Myers',
     ],
     runTime: 134,
-    genre: 'biographical musical drama',
+    genre: 'Biography',
     released: 2018,
     isFavorite: true
   },
@@ -105,7 +105,7 @@ export const films: Films = [
       'Sam Shepard',
     ],
     runTime: 112,
-    genre: 'science fiction',
+    genre: 'Science Fiction',
     released: 2016,
     isFavorite: false
   },
@@ -212,7 +212,7 @@ export const films: Films = [
       'Anjelica Huston',
     ],
     runTime: 91,
-    genre: 'comedy-drama',
+    genre: 'Comedy-drama',
     released: 2007,
     isFavorite: false
   }

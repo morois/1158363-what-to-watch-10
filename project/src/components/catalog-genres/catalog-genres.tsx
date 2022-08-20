@@ -1,4 +1,15 @@
-export default function CatalogGenres () : JSX.Element {
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeGenre, getFilmListGenre } from '../../store/action';
+
+type CatalogGenresProps = {
+  genre: string,
+}
+
+export default function CatalogGenres (props: CatalogGenresProps) : JSX.Element {
+  const {genre} = props;
+  const activeGenge = useAppSelector((state) => state.genres);
+  const dispatch = useAppDispatch();
+  
   return (
     <ul className="catalog__genres-list">
       <li className="catalog__genres-item catalog__genres-item--active">
