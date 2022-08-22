@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import {Film} from './../../types/films';
+import { Film } from './../../types/films';
 import VideoPlayer from '../video-player/video-player';
 
 interface FilmProps {
