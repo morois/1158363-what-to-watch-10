@@ -15,7 +15,7 @@ export type Film = {
     director: string,
     starring: string[],
     runTime: number,
-    genre: string[],
+    genres: string[],
     released: number,
     isFavorite: boolean
 };

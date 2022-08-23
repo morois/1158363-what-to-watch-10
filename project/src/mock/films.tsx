@@ -24,7 +24,7 @@ export const films: Films = [
       'Brendan Gleeson'
     ],
     runTime: 105,
-    genre: ['Drama'],
+    genres: ['Drama'],
     released: 2021,
     isFavorite: false
   },
@@ -51,7 +51,7 @@ export const films: Films = [
       'Jude Law',
     ],
     runTime: 170,
-    genre: ['Drama'],
+    genres: ['Drama'],
     released: 2004,
     isFavorite: true
   },
@@ -79,7 +79,7 @@ export const films: Films = [
       'Mike Myers',
     ],
     runTime: 134,
-    genre: ['Biography'],
+    genres: ['Biography'],
     released: 2018,
     isFavorite: true
   },
@@ -105,7 +105,7 @@ export const films: Films = [
       'Sam Shepard',
     ],
     runTime: 112,
-    genre: ['Science Fiction'],
+    genres: ['Science Fiction'],
     released: 2016,
     isFavorite: false
   },
@@ -129,7 +129,7 @@ export const films: Films = [
       'Will Poulter',
     ],
     runTime: 156,
-    genre: ['Drama'],
+    genres: ['Drama'],
     released: 2015,
     isFavorite: false,
   },
@@ -156,7 +156,7 @@ export const films: Films = [
       'Max von Sydow',
     ],
     runTime: 139,
-    genre: ['Gothic', 'Psychological Horror', 'Crime'],
+    genres: ['Gothic', 'Psychological Horror', 'Crime'],
     released: 2010,
     isFavorite: true
   },
@@ -188,7 +188,7 @@ export const films: Films = [
       'Bruce Willis',
     ],
     runTime: 154,
-    genre: ['Comedy', 'Crime'],
+    genres: ['Comedy', 'Crime'],
     released: 1994,
     isFavorite: false
   },
@@ -212,7 +212,7 @@ export const films: Films = [
       'Anjelica Huston',
     ],
     runTime: 91,
-    genre: ['Comedy', 'Drama'],
+    genres: ['Comedy', 'Drama'],
     released: 2007,
     isFavorite: false
   }
