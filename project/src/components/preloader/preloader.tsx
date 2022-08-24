@@ -1,3 +1,5 @@
+// Позаимствовано с ресурса https://itchief.ru/examples/lab.php?topic=javascript&file=preloader-with-use-svg
+
 export default function Preloader (): JSX.Element {
   return (
     <div className="preloader">
