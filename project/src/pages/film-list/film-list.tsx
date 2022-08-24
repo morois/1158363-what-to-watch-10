@@ -1,11 +1,9 @@
-import { Films } from '../../types/films';
 import FilmCard from '../../components/film-card/film-card';
+import { useAppSelector } from '../../hooks';
 
-type ListProps = {
-    films: Films;
-};
 
-export default function FilmList({films}: ListProps): JSX.Element {
+export default function FilmList(): JSX.Element {
+  const films = useAppSelector((state) => state.filteredFilms);
   const filmCards = films.map((film) => (
     <FilmCard
       key={film.id}

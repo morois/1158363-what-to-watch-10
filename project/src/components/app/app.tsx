@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import CreateMainPage from '../../pages/main/main-page';
@@ -8,14 +9,25 @@ import AddReview from '../../pages/add-review/review-page';
 import SignIn from '../../pages/sign-in/sign-in-page';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import PrivateRoute from '../private-route/private-route';
-import { Films } from '../../types/films';
+import { fetchFilmAction } from '../../store/api-actions';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import Preloader from '../preloader/preloader';
 
+export default function App(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const films = useAppSelector((state) => state.films);
+  const {isDataLoaded} = useAppSelector((state) => state);
 
-type AppProps = {
-  films: Films
-}
+  useEffect(() => {
+    dispatch(fetchFilmAction());
+  }, []);
 
-function App({films}: AppProps): JSX.Element {
+  if (isDataLoaded || films.length === 0) {
+    return (
+      <Preloader/>
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -31,7 +43,7 @@ function App({films}: AppProps): JSX.Element {
           path={AppRoute.MyList}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <MyList films={films}/>
+              <MyList/>
             </PrivateRoute>
           }
         />
@@ -41,7 +53,7 @@ function App({films}: AppProps): JSX.Element {
         />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReview films = {films}/>}
+          element={<AddReview films={films}/>}
         />
         <Route
           path={AppRoute.SignIn}
@@ -56,4 +68,3 @@ function App({films}: AppProps): JSX.Element {
   );
 }
 
-export default App;

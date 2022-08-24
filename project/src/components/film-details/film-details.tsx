@@ -53,7 +53,7 @@ export default function FilmDetails ({films} : FilmDetailsProps) : JSX.Element {
               </p>
               <p className="film-card__details-item">
                 <strong className="film-card__details-name">Genre</strong>
-                <span className="film-card__genre">{film.genres.join(', ')}</span>
+                <span className="film-card__genre">{film.genre}</span>
               </p>
               <p className="film-card__details-item">
                 <strong className="film-card__details-name">Released</strong>

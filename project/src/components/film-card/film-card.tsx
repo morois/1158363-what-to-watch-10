@@ -8,7 +8,7 @@ interface FilmProps {
 }
 
 export default function FilmCard ({film} : FilmProps) : JSX.Element {
-  const {id, posterImage, name} = film;
+  const {id, previewImage, name} = film;
   const [isPlayer, setPlayer] = useState(false);
 
   return (
@@ -17,7 +17,7 @@ export default function FilmCard ({film} : FilmProps) : JSX.Element {
         {
           isPlayer ? <VideoPlayer film={film}/> :
 
-            <img src={posterImage} alt={name} width="280" height="175" />
+            <img src={previewImage} alt={name} width="280" height="175" />
         }
       </div>
       <h3 className="small-film-card__title">

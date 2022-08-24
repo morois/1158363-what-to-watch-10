@@ -27,7 +27,7 @@ export default function FilmPageDetails ({films} : FilmDetailsProps) : JSX.Eleme
           <div className="film-card__desc">
             <h2 className="film-card__title">{film.name}</h2>
             <p className="film-card__meta">
-              <span className="film-card__genre">{film.genres}</span>
+              <span className="film-card__genre">{film.genre}</span>
               <span className="film-card__year">{film.released}</span>
             </p>
 
