@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, loadFilms, setDataLoadedStatus } from './action';
+import { changeGenre, loadFilms} from './action';
 import { Films } from '../types/films';
 
 type InitialState = {
@@ -27,8 +27,6 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(loadFilms, (state, action) => {
       state.films = action.payload;
       state.filteredFilms = action.payload;
-    })
-    .addCase(setDataLoadedStatus, (state, action) => {
-      state.isDataLoaded = action.payload;
+      state.isDataLoaded = true;
     });
 });

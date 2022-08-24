@@ -11,22 +11,14 @@ import PageNotFound from '../../pages/page-not-found/page-not-found';
 import PrivateRoute from '../private-route/private-route';
 import { fetchFilmAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import Preloader from '../preloader/preloader';
 
 export default function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const films = useAppSelector((state) => state.films);
-  const {isDataLoaded} = useAppSelector((state) => state);
 
   useEffect(() => {
     dispatch(fetchFilmAction());
   }, []);
-
-  if (isDataLoaded || films.length === 0) {
-    return (
-      <Preloader/>
-    );
-  }
 
   return (
     <BrowserRouter>

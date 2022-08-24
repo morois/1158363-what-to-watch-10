@@ -7,4 +7,3 @@ export const changeGenre = createAction('film/changeGenre', (genre) => ({
 
 export const loadFilms = createAction<Films>('data/loadFilms');
 
-export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
