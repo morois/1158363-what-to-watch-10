@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { Route, Routes } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import CreateMainPage from '../../pages/main/main-page';
 import FilmPageDetails from '../../pages/film-details/film-details-page';
 import MyList from '../../pages/my-list/my-list-page';
@@ -11,17 +11,20 @@ import PageNotFound from '../../pages/page-not-found/page-not-found';
 import PrivateRoute from '../private-route/private-route';
 import { fetchFilmAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import HistoryRouter from '../history-route/history-route';
+import { browserHistory } from '../../utils/browser-history';
 
 export default function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const films = useAppSelector((state) => state.films);
+  const {autorizationStatus} = useAppSelector((state) => state);
 
   useEffect(() => {
     dispatch(fetchFilmAction());
   }, []);
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Root}
@@ -34,7 +37,7 @@ export default function App(): JSX.Element {
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus={autorizationStatus}>
               <MyList/>
             </PrivateRoute>
           }
@@ -56,7 +59,7 @@ export default function App(): JSX.Element {
           element={<PageNotFound/>}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
