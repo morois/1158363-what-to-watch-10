@@ -1,6 +1,16 @@
 import {Link} from 'react-router-dom';
+import { AuthorizationStatus } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { logoutAction } from '../../store/api-actions';
 
 export default function SignIn () : JSX.Element {
+  const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector((state) => state.autorizationStatus);
+
+  const handleLogout = () => {
+    dispatch(logoutAction());
+  };
+
   return (
     <ul className="user-block">
       <li className="user-block__item">
@@ -9,7 +19,7 @@ export default function SignIn () : JSX.Element {
         </div>
       </li>
       <li className="user-block__item">
-        <Link to={'/login'} className="user-block__link">Sign out</Link>
+        {authorizationStatus === AuthorizationStatus.Auth ? <div onClick={handleLogout} className="user-block__link">Sign out</div> : <Link to={'/login'} className="user-block__link">Sign in</Link> }
       </li>
     </ul>
   );

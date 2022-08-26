@@ -23,3 +23,5 @@ export enum APIRoute {
     Favorite='/favorite/FilmId/status',
     Comments='/comments/filmId',
   }
+
+export const TIMEOUT_SHOW_ERROR = 2000;
