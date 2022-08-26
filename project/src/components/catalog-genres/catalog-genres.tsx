@@ -11,7 +11,7 @@ export default function CatalogGenres ({ films }: CatalogGenresProps) : JSX.Elem
   const activeGenre = useAppSelector((state) => state.genre);
   const dispatch = useAppDispatch();
 
-  const genres = [...new Set(films.flatMap((film) => film.genre))]
+  const genres = [...new Set(films.map((film) => film.genre))]
     .sort((a,b) => a.localeCompare(b));
 
   const onGenreClick = (genre: string) => (event: MouseEvent<HTMLAnchorElement>) => {

@@ -1,14 +1,10 @@
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import SignIn from '../../components/sign-in/sign-in';
-import { Films } from '../../types/films';
 import FilmList from '../film-list/film-list';
 
-type MyListProps = {
-  films: Films;
-}
 
-export default function MyList({films} : MyListProps): JSX.Element {
+export default function MyList(): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -19,7 +15,7 @@ export default function MyList({films} : MyListProps): JSX.Element {
       </header>
 
       <section className="catalog">
-        <FilmList films = {films}/>
+        <FilmList/>
       </section>
 
       <Footer/>
