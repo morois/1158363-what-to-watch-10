@@ -1,18 +1,13 @@
 import { MouseEvent } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { changeGenre } from '../../store/action';
-import { Films } from '../../types/films';
 
-type CatalogGenresProps = {
-  films: Films
+interface CatalogGenresProps {
+  genres: string[];
+  activeGenre: string;
 }
-
-export default function CatalogGenres ({ films }: CatalogGenresProps) : JSX.Element {
-  const activeGenre = useAppSelector((state) => state.genre);
+export default function CatalogGenres ({ genres, activeGenre }: CatalogGenresProps) : JSX.Element {
   const dispatch = useAppDispatch();
-
-  const genres = [...new Set(films.map((film) => film.genre))]
-    .sort((a,b) => a.localeCompare(b));
 
   const onGenreClick = (genre: string) => (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
