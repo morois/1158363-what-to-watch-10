@@ -1,14 +1,11 @@
-import { Films } from '../../types/films';
 import FilmDetails from '../../components/film-details/film-details';
 import PageNotFound from '../page-not-found/page-not-found';
 import {Link, useParams} from 'react-router-dom';
 import DetailsHeader from '../../components/details-header/details-header';
+import { useAppSelector } from '../../hooks';
 
-type FilmDetailsProps = {
-    films : Films
-}
-
-export default function FilmPageDetails ({films} : FilmDetailsProps) : JSX.Element {
+export default function FilmPageDetails () : JSX.Element {
+  const { films } = useAppSelector((state) => state);
   const {id} = useParams();
   const film = films.find((e) => String(e.id) === id);
 

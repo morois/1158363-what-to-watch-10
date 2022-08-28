@@ -1,10 +1,12 @@
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import SignIn from '../../components/sign-in/sign-in';
+import { useAppSelector } from '../../hooks';
+
 import FilmList from '../film-list/film-list';
 
-
 export default function MyList(): JSX.Element {
+  const { films } = useAppSelector((state) => state);
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -15,7 +17,7 @@ export default function MyList(): JSX.Element {
       </header>
 
       <section className="catalog">
-        <FilmList/>
+        <FilmList films={films}/>
       </section>
 
       <Footer/>

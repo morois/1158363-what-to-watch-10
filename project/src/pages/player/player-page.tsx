@@ -1,10 +1,5 @@
-import { Films } from '../../types/films';
 
-type PlayerProps = {
-  films: Films;
-}
-
-export default function Player({films} : PlayerProps): JSX.Element {
+export default function Player(): JSX.Element {
   return (
     <div className="player">
       <video src="#" className="player__video" poster="img/player-poster.jpg"></video>

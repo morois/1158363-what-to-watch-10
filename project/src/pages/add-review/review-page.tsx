@@ -1,13 +1,10 @@
-import { Films } from '../../types/films';
 import AddNewReview from '../../components/add-review/add-review';
 import PageNotFound from '../page-not-found/page-not-found';
 import {Link, useParams} from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
 
-type AddReviewProps = {
-  films: Films
-}
-
-export default function AddReview({films} : AddReviewProps): JSX.Element {
+export default function AddReview(): JSX.Element {
+  const { films } = useAppSelector((state) => state);
   const {id} = useParams();
   const film = films.find((e) => String(e.id) === id);
 

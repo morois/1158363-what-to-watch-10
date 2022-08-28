@@ -10,45 +10,43 @@ import SignIn from '../../pages/sign-in/sign-in-page';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import PrivateRoute from '../private-route/private-route';
 import { fetchFilmAction } from '../../store/api-actions';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import HistoryRouter from '../history-route/history-route';
 import { browserHistory } from '../../utils/browser-history';
 
 export default function App(): JSX.Element {
   const dispatch = useAppDispatch();
-  const films = useAppSelector((state) => state.films);
-  const {autorizationStatus} = useAppSelector((state) => state);
 
   useEffect(() => {
     dispatch(fetchFilmAction());
-  }, []);
+  }, [dispatch]);
 
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<CreateMainPage films={films}/>}
+          element={<CreateMainPage/>}
         />
         <Route
           path={AppRoute.Film}
-          element={<FilmPageDetails films={films}/>}
+          element={<FilmPageDetails/>}
         />
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={autorizationStatus}>
+            <PrivateRoute >
               <MyList/>
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Player}
-          element={<Player films={films}/>}
+          element={<Player/>}
         />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReview films={films}/>}
+          element={<AddReview/>}
         />
         <Route
           path={AppRoute.SignIn}
