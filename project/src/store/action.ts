@@ -13,3 +13,5 @@ export const requireAuthorization = createAction<AuthorizationStatus>('user/requ
 export const setErrorAction = createAction<string | null>('login/setError');
 
 export const redirectToRoute = createAction<AppRoute>('film/redirectToRoute');
+
+export const showMore = createAction<AppRoute>('film/showMore');
