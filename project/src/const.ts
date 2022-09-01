@@ -27,3 +27,11 @@ export enum APIRoute {
 export const TIMEOUT_SHOW_ERROR = 2000;
 
 export const FILMS_PER_PAGE = 8;
+
+export const SIMILAR_FILMS_COUNT = 4;
+
+export enum FilmTabTitle {
+    Overview = 'OVERVIEW',
+    Details = 'DETAILS',
+    Reviews = 'REVIEWS'
+  }

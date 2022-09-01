@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import CreateMainPage from '../../pages/main/main-page';
-import FilmPageDetails from '../../pages/film-details/film-details-page';
+import FilmPageDetails from '../../pages/film-page/film-page';
 import MyList from '../../pages/my-list/my-list-page';
 import Player from '../../pages/player/player-page';
 import AddReview from '../../pages/add-review/review-page';

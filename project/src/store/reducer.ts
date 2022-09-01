@@ -1,7 +1,8 @@
 import { AuthorizationStatus } from './../const';
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, loadFilms, requireAuthorization, setErrorAction, showMore } from './action';
+import { changeGenre, loadFilms, requireAuthorization, setErrorAction, showMore, loadComments } from './action';
 import { Films } from '../types/films';
+import { Comments } from '../types/comments';
 
 type InitialState = {
   genre: string,
@@ -10,6 +11,7 @@ type InitialState = {
   autorizationStatus: AuthorizationStatus,
   error: string | null,
   page: number,
+  comments: Comments
 };
 
 const initialState: InitialState = {
@@ -19,6 +21,7 @@ const initialState: InitialState = {
   autorizationStatus: AuthorizationStatus.Unknown,
   error: null,
   page: 1,
+  comments: []
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -39,6 +42,10 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(showMore, (state) => {
       state.page = state.page + 1;
+    })
+    .addCase(loadComments, (state, action) => {
+      state.comments = action.payload;
+      state.isDataLoaded = false;
     });
 });
 

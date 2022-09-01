@@ -1,6 +1,7 @@
 export type Films = Film[];
 
 export type Film = {
+    filter(arg0: (film: { genre: string; }) => boolean);
     id: number,
     name: string,
     posterImage: string,
