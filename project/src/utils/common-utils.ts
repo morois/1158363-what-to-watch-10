@@ -1,3 +1,6 @@
+import {FILMS_PER_PAGE} from '../const';
+import {Films} from '../types/films';
+
 const getRandomInt = (min: number, max: number) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -18,4 +21,7 @@ const getRendomElement = (array: any[]) => {
   return array[randomIndex];
 };
 
-export {getRendomElement};
+const checkIfHasMore = (films: Films, page: number) => (FILMS_PER_PAGE * page) < films.length;
+
+export {getRendomElement, checkIfHasMore};
+

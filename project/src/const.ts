@@ -25,3 +25,5 @@ export enum APIRoute {
   }
 
 export const TIMEOUT_SHOW_ERROR = 2000;
+
+export const FILMS_PER_PAGE = 8;
