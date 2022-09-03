@@ -3,11 +3,12 @@ import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from './../types/state';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Films } from '../types/films';
-import { loadFilms, redirectToRoute, requireAuthorization, setErrorAction } from './action';
+import { loadComments, loadFilms, redirectToRoute, requireAuthorization, setErrorAction } from './action';
 import { AuthData } from '../types/auth-data';
 import { dropToken, saveToken } from '../services/token';
 import { UserData } from '../types/user-data';
 import { store } from '.';
+import { Comments } from '../types/comments';
 
 export const fetchFilmAction = createAsyncThunk<void, undefined, {
     dispatch: AppDispatch,
@@ -73,4 +74,29 @@ export const clearErrorAction = createAsyncThunk(
       TIMEOUT_SHOW_ERROR,
     );
   },
+);
+
+export const fetchCommentsAction = createAsyncThunk<void, number, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance,
+}> (
+  'data/fetchComments',
+  async (filmId , {dispatch, extra: api}) => {
+    const path = APIRoute.Comments.replace(':filmId', filmId.toString());
+    const {data} = await api.get<Comments>(path);
+    dispatch(loadComments(data));
+  }
+);
+
+export const fetchFilmsFavoriteAction = createAsyncThunk<Films, undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/getFilmsFavorite',
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<Films>(`${APIRoute.Favorite}`);
+    return data;
+  }
 );

@@ -21,9 +21,24 @@ export enum APIRoute {
     FilmSimilar = '/films/{filmId}/similar',
     Promo='/promo',
     Favorite='/favorite/FilmId/status',
-    Comments='/comments/filmId',
+    Comments='/comments/:filmId',
   }
 
 export const TIMEOUT_SHOW_ERROR = 2000;
 
 export const FILMS_PER_PAGE = 8;
+
+export const SIMILAR_FILMS_COUNT = 4;
+
+export enum FilmTabTitle {
+    Overview = 'OVERVIEW',
+    Details = 'DETAILS',
+    Reviews = 'REVIEWS'
+  }
+
+export const RatingLevel = {
+  AWESOME: 10,
+  VERY_GOOD: 8,
+  GOOD: 5,
+  NORMAL: 3,
+};

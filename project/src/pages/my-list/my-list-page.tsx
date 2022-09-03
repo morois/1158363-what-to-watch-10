@@ -6,7 +6,9 @@ import { useAppSelector } from '../../hooks';
 import FilmList from '../film-list/film-list';
 
 export default function MyList(): JSX.Element {
+
   const { films } = useAppSelector((state) => state);
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
