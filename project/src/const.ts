@@ -25,7 +25,7 @@ export enum APIRoute {
   Comments='/comments/:filmId',
 }
 
-export const TIMEOUT_SHOW_ERROR = 2000;
+export const TIMEOUT_SHOW_ERROR = 4000;
 
 export const FILMS_PER_PAGE = 8;
 
