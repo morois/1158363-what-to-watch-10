@@ -1,4 +1,3 @@
-
 import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from './../const';
 import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from './../types/state';
@@ -126,20 +125,20 @@ export const fetchFilmsFavoriteAction = createAsyncThunk<void, undefined, {
   }
 );
 
-export const setFavoriteFilmStatusAction = createAsyncThunk<void, number, {
+export const setFavoriteFilmStatusAction = createAsyncThunk<void, Film, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'data/getFilmsFavorite',
-  async (filmId, {getState, dispatch, extra: api}) => {
-    const state = getState();
-    const newFavoriteState = !state.film?.isFavorite;
+  async (film, {dispatch, extra: api}) => {
+    const newFavoriteState = !film.isFavorite;
     const path = APIRoute.FavoriteStatus
-      .replace(':filmId', filmId.toString())
+      .replace(':filmId', film.id.toString())
       .replace(':status', newFavoriteState ? '1' : '0');
     const {data} = await api.post<Film>(path).finally(() => {
       dispatch(fetchFilmsFavoriteAction());
+      dispatch(getPromoFilm());
     });
     dispatch(loadFilm(data));
   }
@@ -155,5 +154,23 @@ export const getPromoFilm = createAsyncThunk<void, undefined, {
     const {data} = await api.get<Film>(APIRoute.Promo);
     dispatch(loadPromoFilm(data));
     console.log(data);
+  }
+);
+
+export const submitReview = createAsyncThunk<void, { text: string, rating: number, filmId: string }, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance,
+}> (
+  'data/submitComment',
+  async ({ text, rating, filmId }, {dispatch, extra: api}) => {
+    await api.post<Comment>(APIRoute.Comments.replace(':filmId', filmId), {
+      text,
+      rating,
+    }).then(() => {
+      (window as Window).location = AppRoute.Film.replace(':id', filmId);
+    }).catch((response) => {
+      dispatch(setErrorAction(response.data));
+    });
   }
 );

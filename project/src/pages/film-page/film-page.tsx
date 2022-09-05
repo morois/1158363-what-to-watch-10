@@ -36,7 +36,7 @@ export default function FilmPage () : JSX.Element {
   }
 
   const onMyListBtnClick = () => {
-    dispatch(setFavoriteFilmStatusAction(film.id));
+    dispatch(setFavoriteFilmStatusAction(film));
   };
 
   return (
@@ -60,7 +60,7 @@ export default function FilmPage () : JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <PlayBtn/>
+                <PlayBtn id={film.id}/>
                 <MyListBtn onClick={onMyListBtnClick} inList={film.isFavorite} count={favoriteFilms.length} />
                 <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>
               </div>

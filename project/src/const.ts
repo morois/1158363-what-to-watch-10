@@ -31,6 +31,10 @@ export const FILMS_PER_PAGE = 8;
 
 export const SIMILAR_FILMS_COUNT = 4;
 
+export const REVIEW_TEXT_MIN = 50;
+
+export const REVIEW_TEXT_MAX = 400;
+
 export enum FilmTabTitle {
   Overview = 'OVERVIEW',
   Details = 'DETAILS',
