@@ -1,8 +1,6 @@
-
-
-import { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import {useEffect} from 'react';
+import {Route, Routes} from 'react-router-dom';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import CreateMainPage from '../../pages/main/main-page';
 import FilmPageDetails from '../../pages/film-page/film-page';
 import MyList from '../../pages/my-list/my-list-page';
@@ -12,17 +10,21 @@ import SignIn from '../../pages/sign-in/sign-in-page';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import PrivateRoute from '../private-route/private-route';
 import {fetchFilmsAction, fetchFilmsFavoriteAction, getPromoFilm} from '../../store/api-actions';
-import { useAppDispatch } from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import HistoryRouter from '../history-route/history-route';
-import { browserHistory } from '../../utils/browser-history';
+import {browserHistory} from '../../utils/browser-history';
+
 export default function App(): JSX.Element {
   const dispatch = useAppDispatch();
+  const { autorizationStatus } = useAppSelector((state) => state);
 
   useEffect(() => {
     dispatch(fetchFilmsAction());
-    dispatch(fetchFilmsFavoriteAction());
     dispatch(getPromoFilm());
-  }, [dispatch]);
+    if (autorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFilmsFavoriteAction());
+    }
+  }, [dispatch, autorizationStatus]);
 
   return (
     <HistoryRouter history={browserHistory}>
@@ -49,7 +51,11 @@ export default function App(): JSX.Element {
         />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReview/>}
+          element={
+            <PrivateRoute>
+              <AddReview/>
+            </PrivateRoute>
+          }
         />
         <Route
           path={AppRoute.SignIn}

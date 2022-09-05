@@ -7,11 +7,11 @@ import SignIn from '../../components/sign-in/sign-in';
 import Preloader from '../../components/preloader/preloader';
 
 export default function AddReview(): JSX.Element {
-  const { films, isFilmLoaded } = useAppSelector((state) => state);
+  const { films, isDataLoaded } = useAppSelector((state) => state);
   const {id} = useParams();
   const film = films.find((e) => String(e.id) === id);
 
-  if (!isFilmLoaded) {
+  if (!isDataLoaded) {
     return <Preloader/>;
   }
 

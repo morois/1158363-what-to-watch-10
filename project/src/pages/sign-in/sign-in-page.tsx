@@ -19,10 +19,17 @@ export default function SignIn(): JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
+    const isValidPassword = (
+      passwordRef.current !== null
+      && /\d/.test(passwordRef.current?.value)
+      && /[a-zA-Z]/.test(passwordRef.current?.value)
+    );
+
+    if (loginRef.current !== null && isValidPassword) {
       onSubmit({
         login: loginRef.current.value,
-        password: passwordRef.current.value,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        password: passwordRef.current!.value,
       });
     }
   };

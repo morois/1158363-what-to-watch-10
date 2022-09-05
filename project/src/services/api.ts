@@ -2,6 +2,7 @@ import { StatusCodes } from 'http-status-codes';
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { getToken } from './token';
 import { processErrorHandle } from './process-error-handle';
+import { APIRoute, AppRoute } from '../const';
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST] : true,
@@ -35,8 +36,16 @@ export const createAPI = (): AxiosInstance => {
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError) => {
+      if (error.config.url === APIRoute.Login && error.config.method === 'get') {
+        throw error;
+      }
+
       if (error.response && shouldDisplayError(error.response)) {
         processErrorHandle(error.response.data.error);
+      }
+
+      if (error.response?.status === 401) {
+        (window as Window).location = AppRoute.SignIn;
       }
 
       throw error;
@@ -45,5 +54,3 @@ export const createAPI = (): AxiosInstance => {
 
   return api;
 };
-
-

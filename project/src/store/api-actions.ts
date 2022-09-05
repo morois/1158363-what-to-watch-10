@@ -73,6 +73,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     dropToken();
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     dispatch(redirectToRoute(AppRoute.Root));
+    dispatch(loadFavoriteFilms([]));
   }
 );
 
@@ -153,7 +154,6 @@ export const getPromoFilm = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Film>(APIRoute.Promo);
     dispatch(loadPromoFilm(data));
-    console.log(data);
   }
 );
 
@@ -165,12 +165,10 @@ export const submitReview = createAsyncThunk<void, { text: string, rating: numbe
   'data/submitComment',
   async ({ text, rating, filmId }, {dispatch, extra: api}) => {
     await api.post<Comment>(APIRoute.Comments.replace(':filmId', filmId), {
-      text,
+      comment: text,
       rating,
     }).then(() => {
       (window as Window).location = AppRoute.Film.replace(':id', filmId);
-    }).catch((response) => {
-      dispatch(setErrorAction(response.data));
     });
   }
 );

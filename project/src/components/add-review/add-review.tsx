@@ -1,15 +1,23 @@
-import {ChangeEvent, FormEvent, Fragment, useState} from 'react';
-import {useAppDispatch} from '../../hooks';
+import {ChangeEvent, FormEvent, Fragment, useEffect, useState} from 'react';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {submitReview} from '../../store/api-actions';
 import {useParams} from 'react-router-dom';
 import { REVIEW_TEXT_MAX, REVIEW_TEXT_MIN } from '../../const';
 
 export default function AddNewReview() : JSX.Element {
+  const { error } = useAppSelector((state) => state);
   const [text, setText] = useState('');
   const [rating, setRating] = useState(0);
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const dispatch = useAppDispatch();
   const {id: filmId} = useParams();
+
+  useEffect(() => {
+    const disable =
+      (text.length < REVIEW_TEXT_MIN || text.length > REVIEW_TEXT_MAX)
+      || (rating > 10 || rating < 1);
+    setSubmitDisabled(disable);
+  }, [text, rating]);
 
   const fieldChangeHandler = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setText(evt.target.value);
@@ -37,34 +45,27 @@ export default function AddNewReview() : JSX.Element {
     );
   });
 
-  const isValid = () => {
-    if (text.length < REVIEW_TEXT_MAX ||
-        text.length > REVIEW_TEXT_MIN
-    ) {
-      return true;
-    } else {
-      setSubmitDisabled(true);
-    }
-  };
-
   const onFormSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // воооооооо тут
-    if (isValid()) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      dispatch(submitReview({ text, rating, filmId: filmId! }));
-    }
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    dispatch(submitReview({ text, rating, filmId: filmId! }));
   };
 
   return (
     <div className="add-review">
       <form action="#" className="add-review__form" onSubmit={onFormSubmit}>
+        {
+          error ? (
+            <div style={{color: 'tomato'}}>
+              {error}
+            </div>
+          ) : null
+        }
         <div className="rating">
           <div className="rating__stars" onChange={ratingInputClickHandler}>
             {starsButtonList}
           </div>
         </div>
-
         <div className="add-review__text">
           <textarea
             onChange={fieldChangeHandler}
@@ -77,7 +78,7 @@ export default function AddNewReview() : JSX.Element {
             maxLength={REVIEW_TEXT_MAX}
           />
           <div className="add-review__submit">
-            <button className="add-review__btn" type="submit" disabled={submitDisabled} >Post</button>
+            <button className="add-review__btn" type="submit" disabled={submitDisabled}>Post</button>
           </div>
         </div>
       </form>
