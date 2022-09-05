@@ -1,36 +1,43 @@
 import {useEffect} from 'react';
-import {Link, useParams} from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import DetailsHeader from '../../components/details-header/details-header';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import Tabs from '../../components/tabs/tabs';
 import Footer from '../../components/footer/footer';
 import SimilarFilms from '../../components/similar-films/similar-films';
-import {fetchCommentsAction} from '../../store/api-actions';
+import { fetchCommentsAction, fetchFilmAction, setFavoriteFilmStatusAction } from '../../store/api-actions';
 import PageNotFound from '../page-not-found/page-not-found';
 import Preloader from '../../components/preloader/preloader';
 import PlayBtn from '../../components/play-btn/play-btn';
 import MyListBtn from '../../components/my-list-btn/my-list-btn';
 
 export default function FilmPage () : JSX.Element {
-  const { films, comments } = useAppSelector((state) => state);
-  const isDataLoading = useAppSelector((state) => state.isDataLoaded);
+  const { film, comments, isFilmLoaded, favoriteFilms } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-  const {id} = useParams();
-  const film = films.find((e) => String(e.id) === id);
+  const { id } = useParams();
 
   useEffect(() => {
-    if (film) {
+    // eslint-disable-next-line no-mixed-operators
+    if (!isFilmLoaded || film && film.id.toString() !== id) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      dispatch(fetchFilmAction(id!));
+    }
+    if (isFilmLoaded && film) {
       dispatch(fetchCommentsAction(film.id));
     }
-  }, [dispatch, film]);
+  }, [dispatch, film, id, isFilmLoaded]);
 
-  if (!isDataLoading) {
+  if (!isFilmLoaded) {
     return <Preloader/>;
   }
 
   if (!film) {
     return <PageNotFound/>;
   }
+
+  const onMyListBtnClick = () => {
+    dispatch(setFavoriteFilmStatusAction(film.id));
+  };
 
   return (
     <>
@@ -54,7 +61,7 @@ export default function FilmPage () : JSX.Element {
 
               <div className="film-card__buttons">
                 <PlayBtn/>
-                <MyListBtn/>
+                <MyListBtn onClick={onMyListBtnClick} inList={film.isFavorite} count={favoriteFilms.length} />
                 <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>
               </div>
             </div>
@@ -65,7 +72,7 @@ export default function FilmPage () : JSX.Element {
       </section>
       <div className="page-content">
         <SimilarFilms genre={film.genre}/>
-        <Footer />
+        <Footer/>
       </div>
     </>
   );

@@ -1,3 +1,5 @@
+
+
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
@@ -9,7 +11,7 @@ import AddReview from '../../pages/add-review/review-page';
 import SignIn from '../../pages/sign-in/sign-in-page';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import PrivateRoute from '../private-route/private-route';
-import { fetchFilmAction } from '../../store/api-actions';
+import {fetchFilmsAction, fetchFilmsFavoriteAction, getPromoFilm} from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 import HistoryRouter from '../history-route/history-route';
 import { browserHistory } from '../../utils/browser-history';
@@ -17,7 +19,9 @@ export default function App(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchFilmAction());
+    dispatch(fetchFilmsAction());
+    dispatch(fetchFilmsFavoriteAction());
+    dispatch(getPromoFilm());
   }, [dispatch]);
 
   return (
@@ -59,4 +63,3 @@ export default function App(): JSX.Element {
     </HistoryRouter>
   );
 }
-

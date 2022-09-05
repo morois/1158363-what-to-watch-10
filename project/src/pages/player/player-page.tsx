@@ -9,7 +9,6 @@ export default function Player(): JSX.Element {
   const film = films.find((e) => String(e.id) === id);
   const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const video = videoRef.current;
   const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const [togglerPos, setTogglerPos] = useState(0);
@@ -24,6 +23,7 @@ export default function Player(): JSX.Element {
   };
 
   useEffect(() => {
+    const video = videoRef.current;
     if (video === null) {
       return;
     }
@@ -59,8 +59,9 @@ export default function Player(): JSX.Element {
       video.addEventListener('canplay', removeIsLoading);
     };
 
-  }, [video, isPlaying, film]);
+  }, [videoRef, isPlaying, film, isLoading]);
 
+  const video = videoRef.current;
   return (
     <div className="player">
       {isLoading && <Preloader />}
@@ -121,3 +122,4 @@ export default function Player(): JSX.Element {
     </div>
   );
 }
+
